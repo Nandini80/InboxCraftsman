@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload your CSV &#128640;</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #4682B4);
+            color: #333;
+            /* min-height: 100vh; */
+            font-size: 12px;
+
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: black;
+            color: #fff;
+            padding: 5px 0;
+            border-bottom: #ddd 4px solid;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        header a:hover {
+            color: #e8491d;
+        }
+
+        header #branding {
+            float: left;
+        }
+
+        header #branding h1 {
+            margin: 0;
+        }
+
+        header #branding h1 a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 22px;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        main {
+            /* padding: 20px 0; */
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            /* width: 80%; */
+
+        }
+
+        section {
+            flex: 1;
+        }
+
+        section h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 70%;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="checkbox"] {
+            margin-top: 0;
+        }
+
+        input[type="submit"] {
+            background-color: #e8491d;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+        }
+
+        aside {
+            flex-basis: 30%;
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            margin-top: 20px;
+            margin-bottom: 0;
+            padding: 5px;
+            text-align: center;
+            color: white;
+        }
+
+        #yo {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight"><a>Upload your CSV here!!&#128640;</a></span></h1>
+            </div>
+            <nav>
+                <a href="/index">Home</a>
+                <a href="/features">Features</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <p id="yo">Upload your CSV file below to scan.</p>
+
+    <div class="container">
+        <main>
+
+            <section>
+
+                <form action="#" method="post" enctype="multipart/form-data" id="uploadForm">
+                    <input type="file" name="csvFile" accept=".csv" />
+                    <input type="submit" value="Upload" />
+                </form>
+
+                <script>
+                    document.getElementById('uploadForm').addEventListener('submit', function (event) {
+                        event.preventDefault();
+                        let formData = new FormData(this);
+
+                        fetch('/upload', {
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                console.log('File uploaded successfully:', data);
+                                alert("File uploaded successfully!!");
+                                location.assign("/display");
+                            })
+                            .catch(error => {
+                                console.error('There was a problem with the file upload:', error);
+                            });
+                    });
+                </script>
+            </section>
+
+            <aside>
+                <p>Additional Information:</p>
+                <ul>
+                    <li>You can upload csv file only.</li>
+                    <li>The format of csv should be standard.</li>
+                    <li>On uploading ,you can double check the information inside CSV.</li>
+                </ul>
+            </aside>
+        </main>
+    </div>
+
+    <footer style="margin-top: 17rem;">
+        <p>&copy; 2023 Your Ticketing Site. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

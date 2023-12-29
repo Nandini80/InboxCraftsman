@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;1,400&family=Nunito:wght@600;900&family=Roboto&family=Rubik+Doodle+Shadow&family=Rubik+Doodle+Triangles&family=Rubik+Lines&family=Sriracha&display=swap"
+        rel="stylesheet">
+
+    <!-- /<link rel="stylesheet" href="styles.css"> -->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            /* justify-content: space-between; */
+            height: 100vh;
+            /* background-image: linear-gradient(to bottom, rgba(255, 192, 203, 0.365), white); */
+            /* background-image: url("logo.png"); */
+            /* background-size: contain; */
+            /* background-position: center; */
+            /* opacity: 0.8;     */
+            /* background-image: linear-gradient(to bottom, rgb(255, 0, 0), white); */
+            background-image: linear-gradient(to bottom, rgba(189, 227, 244, 0.365), white);
+            position: relative;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer {
+            width: 100%;
+            background-color: rgb(103, 100, 100);
+            text-align: center;
+            padding: 1vh;
+            position: fixed;
+            bottom: 0;
+            color: white;
+            font-size: 0.8em
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            height: 9vh;
+            width: 100%;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: 4vh;
+            border-bottom: 1px solid grey;
+            padding: 5vh;
+
+
+        }
+
+        .heading {
+            font-size: 0.7em;
+            font-family: nunito;
+        }
+
+        .ems {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .nav-features {
+            padding: 1px 10px;
+            font-size: 1rem;
+            text-decoration: none;
+            color: white;
+         
+
+        }
+
+        .contact {
+            width: 25%;
+            height: 75 vh;
+            background-color: white;
+            /* align-self: center; */
+            margin: 4vh auto;
+            border-radius: 3px;
+            border: 1px solid grey;
+            text-align: center;
+
+        }
+
+        #form {
+            /* text-align: center; */
+            margin: 10px;
+        }
+
+        input {
+            width: 80%;
+            margin: 0.1rem;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ccc;
+        }
+
+        .design {
+            padding-top: 5%;
+            padding-bottom: 5%;
+        }
+
+        .e {
+            color: blue;
+        }
+
+        .m {
+            color: orange;
+        }
+
+        .s {
+            color: red;
+        }
+
+        .sign {
+
+            padding: 3px;
+            font-weight: 500;
+            font-size: 1.2em;
+        }
+
+        .create {
+            font-size: 0.8em;
+        }
+
+        button {
+            padding: 0.5em 2em;
+            margin-top: 0.8em;
+            background-color: #e8491d;
+            border-radius: 0.5em;
+            cursor: pointer;
+            border: 0;
+            color: #fff;
+        }
+
+        button:hover {
+            /* background-color: #4682B4; */
+            /* border: 2px solid #ccc; */
+            box-shadow: 0px 0px 4px red;
+        }
+
+        a:hover {
+            /* text-shadow: 0px 0px 2px whitesmoke; */
+            color: red;
+        }
+
+        textarea {
+            width: 80%;
+            margin: 0.3em;
+            padding: 1em;
+            border-radius: 0.5em;
+            border: 1px solid #ccc;
+        }
+
+        /* home page */
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="heading">
+                <span class="ems"> <span class="e">E</span><span class="m">M</span><span class="s">S &nbsp
+                    </span></span>
+
+                <span class="ems"> Event Management Services</span>
+            </div>
+            <div class="nav">
+                <a class="nav-features" href="/">Home</a>
+                <a class="nav-features" href="/features">Features</a>
+                <a class="nav-features" href="/contact">Contact</a>
+            </div>
+        </div>
+
+        <div class="contact">
+            <div class="design"> <span class="e">E</span><span class="m">M</span><span class="s">S</span></div>
+            <div class="sign">Contact Us</div>
+            <div class="create">Thanks for reaching out to us</div>
+            <form id="form">
+                <input required type="text" placeholder="Name"> <br>
+                <input required type="email" placeholder="Email"> <br>
+                <textarea rows="6" placeholder="Your message" id="message" name="message" required></textarea> <br>
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
+
+        <div class="footer">
+            &copy; 2023 CraftsMan ltd. All rights reserved.
+        </div>
+    </div>
+</body>
+
+</html>
