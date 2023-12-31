@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>CSV DATA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;1,400&family=Nunito:wght@600;900&family=Roboto&family=Rubik+Doodle+Shadow&family=Rubik+Doodle+Triangles&family=Rubik+Lines&family=Sriracha&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;1,400&family=Nunito:wght@600;900&family=Roboto&family=Rubik+Doodle+Shadow&family=Rubik+Doodle+Triangles&family=Rubik+Lines&family=Sriracha&display=swap"
         rel="stylesheet">
     <style>
-        *
-        {
+        * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
@@ -15,24 +16,26 @@
             font-family: nunito;
 
         }
-        .wrapper{
+
+        .wrapper {
             background-image: linear-gradient(to bottom, rgba(189, 227, 244), white);
-         width: 100%;
-         height: 100vh;
-         padding-top: 0.5rem;
+            width: 100%;
+            height: 100vh;
+            padding-top: 0.5rem;
         }
-        .heading
-        {
-            background-color: white;
+
+        .heading {
+            /* background-color: white; */
             width: fit-content;
             margin: auto;
-                    padding: 0.2rem 0.4rem;
+            padding: 0.2rem 0.4rem;
             text-shadow: 0 0 4px pink;
-        box-shadow: 0 0 10px black;
+            /* box-shadow: 0 0 10px black; */
             font-family: nunito;
         }
-          button {
-            height: fit-content ;
+
+        button {
+            height: fit-content;
             padding: 0.5em 2em;
             margin-top: 0.8em;
             background-color: #e8491d;
@@ -43,39 +46,207 @@
         }
 
         button:hover {
-            /* background-color: #4682B4; */
-            /* border: 2px solid #ccc; */
             box-shadow: 0px 0px 4px red;
-            transform: scale(1.2,1.2);
+            transform: scale(1.05, 1.05);
         }
-        #buttons
-        {
+
+        #buttons {
             width: 100%;
             height: fit-content;
             display: flex;
             justify-content: space-evenly;
-                }
+        }
+
+        .e {
+            color: blue;
+        }
+
+        .m {
+            color: orange;
+        }
+
+        .s {
+            color: red;
+        }
+
+        a:hover {
+            /* text-shadow: 0px 0px 2px whitesmoke; */
+            color: red;
+        }
+
+        .sign {
+
+            padding: 1rem;
+            font-weight: 500;
+            font-size: 1.2em;
+        }
+
+        .design {
+            /* padding: 1rem ; */
+            font-size: 2rem;
+        }
+
+        .main {
+            border: 1px solid grey;
+            width: fit-content;
+            border-radius: 3px;
+            height: fit-content;
+            padding: 2rem 2rem;
+            text-align: center;
+            background-color: white;
+        }
+
+        .main:hover {
+            box-shadow: 0 0 10px black;
+        }
+
+        table {
+            margin: auto;
+            margin-bottom: 1rem;
+
+        }
+
+        td {
+            border: 1px solid grey;
+            padding: 0.5rem 1rem;
+        }
+
+        button {
+            padding: 0.5em 2em;
+            margin-top: 0.8em;
+            background-color: #e8491d;
+            border-radius: 0.5em;
+            cursor: pointer;
+            border: 0;
+            color: #fff;
+            margin-right: 0.5rem;
+        }
+
+        button:hover {
+            box-shadow: 0px 0px 4px red;
+        }
+
+        .outter {
+            display: flex;
+            justify-content: center;
+            margin-top: 200px;
+            margin-bottom: 50px;
+        }
+
+        .container1 {
+            display: none;
+        }
+
+        .container2 {
+            display: none;
+        }
     </style>
+
+    <script>
+        function container1Open() {
+            document.getElementsByClassName('container1')[0].style.display = "block";
+            document.getElementsByClassName('container2')[0].style.display = "none";
+        }
+
+        //function container2Open() {
+            //document.getElementsByClassName('container1')[0].style.display = "none";
+            //document.getElementsByClassName('container2')[0].style.display = "block";
+      //  }
+
+        function doCollectData1() 
+        {
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time1").value;
+            var datetimeString = date + 'T' + time;
+            var datetime = new Date(datetimeString);
+            var timestamp = datetime.getTime();
+            alert("Timestamp: " + timestamp);
+            const url = `/getPArticularDate?timestamp=${timestamp}`;
+
+            var checkedCheckboxes = document.querySelectorAll('.data-checkbox:checked');
+            if (checkedCheckboxes.length === 0) {
+                alert('Please select at least one data item.');
+                return;
+            }
+        
+            var dataToSend = [];
+            checkedCheckboxes.forEach(function(checkbox) {
+                dataToSend.push(checkbox.value);
+            });
+        
+            console.log('Selected data IDs to send mail:', dataToSend);
+        
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        alert('Selected mail will be sent successfully.');
+                        location.reload(); 
+                    } else {
+                        alert('Error Sending mail:', xhr.status);
+                    }
+                }
+            };
+            xhr.send(JSON.stringify({ ids: dataToSend }));
+            
+        }
+        //function doCollectData2() {
+            //var time = document.getElementById("time2").value;
+            //var gap = document.getElementById("gap").value;
+            //alert(time);
+            //alert(gap);
+        // }
+
+    </script>
 </head>
+
 <body>
     <div class="wrapper">
-    <h1 class="heading">Data Inside CSV file</h1>
-    <div id="data-container"></div>
-    
-    <form id="action-form">
-        <br><br>
-    <div id="buttons">
-<button type="button" id="send-email-btn">Send Email</button>
-<button type="button" id="delete-data-btn">Delete Selected Data</button>
-    </div>
-        
-    </form>
+        <h1 class="heading">Data Inside CSV file</h1>
+        <div id="data-container"></div>
 
+        <form id="action-form">
+            <br><br>
+            <div id="buttons">
+                <button type="button" id="send-email-btn">Send Email</button>
+                <button type="button" id="delete-data-btn">Delete Data</button>
+            </div>
+        </form>
+
+        <h1 class="heading" style="margin-top: 50px;">Schedule the email</h1>
+        <div style="text-align: center;">
+            <button onclick="container1Open()" id="service1">Send emails at one particular time </button>
+        </div>
+    </div>
+    <div class="outter">
+        <div class="container1">
+            <div class="main">
+                <div class="design"> <span class="e">E</span><span class="m">M</span><span class="s">S</span></div>
+                <div class="sign">Email Scheduling Services</div>
+                <table>
+                    <tr>
+                        <td>Date</td>
+                        <td><input type="date" id="date"></td>
+                    </tr>
+                    <tr>
+                        <td>time</td>
+                        <td><input type="time" id="time1"></td>
+                    </tr>
+                </table>
+                <button onclick="doCollectData1();">Submit</button>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="main">
+                <div class="design"> <span class="e">E</span><span class="m">M</span><span class="s">S</span></div>
+                <div class="sign">Email Scheduling 
+            </div>
+        </div>
     </div>
 
-    <script src="./displayData.js"></script> 
+    <script src="./displayData.js"></script>
 </body>
+
 </html>
-
-
-

@@ -9,7 +9,8 @@ const { UploadRoute } = require("./routes/index");
 let fileUploadPath = "./public/uploads/";
 const fs = require("fs");
 const csv = require("csv-parser");
-const { SendMail } = require("./sendmail")
+const { SendMail } = require("./sendmail");
+const { ParticularDate } = require("./schedule");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -161,10 +162,67 @@ app.post("/mail-data", async (req, res) => {
         
     }
     res.status(200).send("Mail sent successfully!!");
-})
+});
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
+
+//====================scheduling====================
+app.post("/getPArticularDate", async (req, res) => {
+  const data = req.body.ids;
+  const timestamp = req.query.timestamp;
+  const T1 = require("./Models/1schedule");
+
+  console.log(data);
+  const len = data.length;
+
+  for (let i = 0; i < len; i++) {
+    try {
+        const J1 = await CSVModel.findOne({
+            _id: data[i]
+        });
+        if (J1) {
+            const mail = await J1.Email;
+            console.log(mail);
+            const tt = await T1.findOneAndUpdate({
+              Email: mail,
+             },{
+              Email: mail,
+              TimeStamp: timestamp,
+             },{
+              upsert: true,
+              new: true,
+             });
+             console.log(tt);
+            } // added to database of every timestamp!!; 
+    }
+    catch (error) {
+        console.error('Error Sending Mailss:', error);
+        res.status(500).send('Error Sending Mails');
+    }
+    // res.status(200).send("Mail sent successfully!!");
+    await ParticularDate();   
+}
+});
+
+
+// const schedule = require("node-schedule");
+// const date = new Date('2023-12-29T22:13:08.000+5:30');
+// schedule.scheduleJob(date,()=>{
+//   console.log("job ran @",new Date().toString());
+// })
+
+
+                  //    s m h d m w
+// schedule.scheduleJob('m-Job','*/2 * * * * *',()=>{
+//   console.log("I ran..");
+//   schedule.cancelJob('m-Job');
+// })
+
+// const job = schedule.scheduleJob('*/2 * * * * *',()=>{
+//      console.log("I ran..");
+//      job.cancel();
+// });

@@ -10,8 +10,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;1,400&family=Nunito:wght@600;900&family=Roboto&family=Rubik+Doodle+Shadow&family=Rubik+Doodle+Triangles&family=Rubik+Lines&family=Sriracha&display=swap"
         rel="stylesheet">
-
-    <!-- /<link rel="stylesheet" href="styles.css"> -->
     <style>
         * {
             padding: 0;
@@ -22,14 +20,7 @@
         .wrapper {
             display: flex;
             flex-direction: column;
-            /* justify-content: space-between; */
             height: 100vh;
-            /* background-image: linear-gradient(to bottom, rgba(255, 192, 203, 0.365), white); */
-            /* background-image: url("logo.png"); */
-            /* background-size: contain; */
-            /* background-position: center; */
-            /* opacity: 0.8;     */
-            /* background-image: linear-gradient(to bottom, rgb(255, 0, 0), white); */
             background-image: linear-gradient(to bottom, rgba(189, 227, 244, 0.365), white);
             position: relative;
             justify-content: center;
@@ -166,6 +157,12 @@
 
         /* home page */
     </style>
+    <script>
+      function  doNavigate()
+      {
+        window.location.href = 'index.html';
+      }
+    </script>
 </head>
 
 <body>
@@ -180,7 +177,7 @@
             <div class="nav">
                 <a class="nav-features" href="/">Home</a>
                 <a class="nav-features" href="/features">Features</a>
-                <a class="nav-features" href="/contact">Contact</a>
+                <a class="nav-features" href="/register">Register</a>
             </div>
         </div>
 
@@ -192,7 +189,7 @@
                 <input required type="text" placeholder="Name"> <br>
                 <input required type="email" placeholder="Email"> <br>
                 <textarea rows="6" placeholder="Your message" id="message" name="message" required></textarea> <br>
-                <button type="submit">Sign up</button>
+                <button onclick="doNavigate();">Send</button>
             </form>
         </div>
 

@@ -29,7 +29,7 @@ async function SendMail(email) {
     template: 'email',
     context: {
       title: 'JSCOP Inhouse Hackathon',
-      text: "Optica is a society dedicated to the advancement of optics and photonics. Members are likely professionals, researchers, and enthusiasts in the field of optics."
+      text: "this is text"
     },
     attachments: [
       {
@@ -41,7 +41,7 @@ async function SendMail(email) {
 
   }, (err, info) => {
     if (err) throw err;
-    console.log(`Mail sent to ${email}: ${info.response}`);
+    console.log(`Mail sent to ${email},${name}: ${info.response}`);
   });
 }
 
